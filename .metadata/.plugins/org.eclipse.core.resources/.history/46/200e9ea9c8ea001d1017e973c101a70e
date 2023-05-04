@@ -91,7 +91,7 @@
 
 /* Common Macros */
 #define __VO                         volatile
-#define __ui32                       uint32_t
+
 /*=============================================================================
 =======                       CONSTANTS  &  TYPES                       =======
 =============================================================================*/
@@ -125,87 +125,5 @@ typedef struct
 
 }GPIO_RegDef_t;
 
-/* RCC structure Definition */
-
-typedef struct
-{
-	/* RCC Clock Control Register   */
-	__VO __ui32 CR;
-	/* PLL configuration Register   */
-	__VO __ui32 PLL_CFGR;
-	/* Clock configuration Register */
-	__VO __ui32 CFGR;
-	/* Clock Interrupt Register     */
-	__VO __ui32 CIR;
-	/* AHB1 Reset Register          */
-	__VO __ui32 AHB1_RSTR;
-	/* AHB2 Reset Register          */
-	__VO __ui32 AHB2_RSTR;
-	/* AHB3 Reset Register          */
-	__VO __ui32 AHB3_RSTR;
-	/* Reserved                     */
-	__VO __ui32 Reserved1;
-	/* APB1 Reset Register          */
-	__VO __ui32 APB1_RSTR;
-	/* APB2 Reset Register          */
-	__VO __ui32 APB2_RSTR;
-	/* Reserved                     */
-	__VO __ui32 Reserved2;
-	/* Reserved                     */
-	__VO __ui32 Reserved3;
-	/* AHB1 clock Enable Register   */
-	__VO __ui32 AHB1ENR;
-	/* AHB2 clock Enable Register   */
-	__VO __ui32 AHB2ENR;
-	/* AHB3 clock Enable Register   */
-	__VO __ui32 AHB3ENR;
-	/* Reserved                     */
-	__VO __ui32 Reserved4;
-	/* APB1 clock Enable Register   */
-	__VO __ui32 APB1ENR;
-	/* APB2 clock Enable Register   */
-	__VO __ui32 APB2ENR;
-	/* Reserved                     */
-	__VO __ui32 Reserved5;
-	/* Reserved                     */
-	__VO __ui32 Reserved6;
-	/* AHB1 Low power Mode Enable   */
-	__VO __ui32 AHB1_LPENR;
-	/* AHB2 Low power Mode Enable   */
-	__VO __ui32 AHB2_LPENR;
-	/* AHB3 Low power Mode Enable   */
-	__VO __ui32 AHB3_LPENR;
-	/* Reserved                     */
-	__VO __ui32 Reserved7;
-	/* APB1 Low power Mode Enable   */
-	__VO __ui32 APB1_LPENR;
-	/* APB2 Low power Mode Enable   */
-	__VO __ui32 APB2_LPENR;
-	/* Reserved                     */
-	__VO __ui32 Reserved8;
-	/* Reserved                     */
-	__VO __ui32 Reserved9;
-	/* Backup Domain Control Reg    */
-    __VO __ui32 BDCR;
-	/* clock Control and Status Reg */
-    __VO __ui32 CSR;
-	/* Reserved                     */
-    __VO __ui32 Reserved10;
-	/* Reserved                     */
-    __VO __ui32 Reserved11;
-	/* Spread Spectrum Clock Gen    */
-    __VO __ui32 SS_CGR;
-    /* PLL I2S configuration Reg    */
-    __VO __ui32 PLLI2_SCFGR;
-	/* PLL SA1 Configuration Reg    */
-    __VO __ui32 PLL_SA1_CFGR;
-    /* PLL Configuration Reg        */
-    __VO __ui32 DCK_CFGR;
-	/* Dedicated Clock Config Reg   */
-    __VO __ui32 CK_GATENR;
-    /*  clock Gate Enable Register  */
-    __VO __ui32 DCK_CFGR2;
-
-}RCC_RegDef_t;
-
+/* GPIO MACRO Defintions */
 #endif /* STM32F446XX_H_ */
