@@ -50,5 +50,28 @@
 #define GPIOG    ((GPIO_RegDef_t*)GPIOG_BASEADDR)
 /* Access to GPIO H structure with corresponding address */
 #define GPIOH    ((GPIO_RegDef_t*)GPIOH_BASEADDR)
+/* RCC Register Access=                                  */
+#define RCC                         ((RCC_RegDef_t*)RCC_BASEADDR)
+
+/* Clock Access Definition to GPIO ports through RCC Engine*/
+#define GPIOA_CLK_EN()     ((RCC->AHB1ENR |= 1<<0))
+#define GPIOB_CLK_EN()     ((RCC->AHB1ENR |= 1<<1))
+#define GPIOC_CLK_EN()     ((RCC->AHB1ENR |= 1<<2))
+#define GPIOD_CLK_EN()     ((RCC->AHB1ENR |= 1<<3))
+#define GPIOE_CLK_EN()     ((RCC->AHB1ENR |= 1<<4))
+#define GPIOF_CLK_EN()     ((RCC->AHB1ENR |= 1<<5))
+#define GPIOG_CLK_EN()     ((RCC->AHB1ENR |= 1<<6))
+#define GPIOH_CLK_EN()     ((RCC->AHB1ENR |= 1<<7))
+
+/* Disable GPIO Ports WHEN not needed. Note: By Default Register holds a 0 by default */
+
+#define GPIOA_CLK_DI()     ((RCC->AHB1ENR &= ~(1<<0)))
+#define GPIOB_CLK_DI()     ((RCC->AHB1ENR &= ~(1<<1)))
+#define GPIOC_CLK_DI()     ((RCC->AHB1ENR &= ~(1<<2)))
+#define GPIOD_CLK_DI()     ((RCC->AHB1ENR &= ~(1<<3)))
+#define GPIOE_CLK_DI()     ((RCC->AHB1ENR &= ~(1<<4)))
+#define GPIOF_CLK_DI()     ((RCC->AHB1ENR &= ~(1<<5)))
+#define GPIOG_CLK_DI()     ((RCC->AHB1ENR &= ~(1<<6)))
+#define GPIOH_CLK_DI()     ((RCC->AHB1ENR &= ~(1<<7)))
 
 #endif /* INC_STM32F44XX_GPIO_H_ */

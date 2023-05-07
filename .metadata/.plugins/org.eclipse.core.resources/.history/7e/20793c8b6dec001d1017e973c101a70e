@@ -1,0 +1,50 @@
+/******************************************************************************
+*****                    STM MAIN SPI HEADER FILE                       *****
+******************************************************************************/
+/*!
+***     \file       Stm32f44xx_SPI.h
+***
+***     \author     Aditya Subramanian
+***
+***
+***     \brief      This module is intended to provide key SPI specific details.
+***     \par        File_description
+***
+***
+***
+*\n*/
+/*****************************************************************************/
+
+/*=============================================================================
+=======                            INCLUDES                             =======
+=============================================================================*/
+#ifndef INC_STM32F44XX_SPI_H_
+#define INC_STM32F44XX_SPI_H_
+
+/*------ standard includes -------*/
+#include<stdint.h>
+/*------ project includes --------*/
+
+/*------ module includes ---------*/
+#include "stm32f446xx.h"
+
+/*=============================================================================
+=======               DEFINES & MACROS FOR GENERAL PURPOSE              =======
+=============================================================================*/
+
+/* SPI Peripheral Clock Enable Macro */
+
+#define SPI1_CLK_EN()    (RCC->APB2ENR |= (1<<12))
+#define SPI2_CLK_EN()    (RCC->APB1ENR |= (1<<14))
+#define SPI3_CLK_EN()    (RCC->APB1ENR |= (1<<15))
+#define SPI4_CLK_EN()    (RCC->APB2ENR |= (1<<13))
+
+/* SPI Peripheral Clock Disable Macro */
+
+#define SPI1_CLK_EN()    (RCC->APB2ENR &= ~(1<<12))
+#define SPI2_CLK_EN()    (RCC->APB1ENR &= ~(1<<14))
+#define SPI3_CLK_EN()    (RCC->APB1ENR &= ~(1<<15))
+#define SPI4_CLK_EN()    (RCC->APB2ENR &= ~(1<<13))
+
+
+#endif /* INC_STM32F44XX_SPI_H_ */

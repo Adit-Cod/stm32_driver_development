@@ -87,7 +87,7 @@
 
 /* RCC Engine Base Address */
 #define RCC_BASEADDR                (AHB1_BASEADDR + 0x3800U)
-#define RCC                          RCC_BASEADDR
+
 
 /* Common Macros */
 #define __VO                         volatile
@@ -103,25 +103,25 @@
 typedef struct
 {
 	/* Port ModeR Register               */
-	__VO uint32_t MODER;
+	__VO __ui32 MODER;
     /* Port Output Type Register         */
-	__VO uint32_t OTYPER;
+	__VO __ui32 OTYPER;
     /* Port output Speed Register        */
-	__VO uint32_t OSPEEDER;
+	__VO __ui32 OSPEEDER;
     /* Port Pull-Up Pull-Down Register   */
-	__VO uint32_t PUPDR;
+	__VO __ui32 PUPDR;
     /* Port Input Data Register          */
-	__VO uint32_t IDR;
+	__VO __ui32 IDR;
     /* Port Output Data Register         */
-	__VO uint32_t ODR;
+	__VO __ui32 ODR;
     /* Port Bit Set/Reset Register       */
-	__VO uint32_t BSRR;
+	__VO __ui32 BSRR;
     /* Configuration Lock Register       */
-	__VO uint32_t LCKR;
+	__VO __ui32 LCKR;
     /* Alternate Function Register Low   */
-	__VO uint32_t AFRL;
+	__VO __ui32 AFRL;
     /* Alternate Function Register High  */
-	__VO uint32_t AFRH;
+	__VO __ui32 AFRH;
 
 }GPIO_RegDef_t;
 
@@ -207,5 +207,6 @@ typedef struct
     __VO __ui32 DCK_CFGR2;
 
 }RCC_RegDef_t;
+
 
 #endif /* STM32F446XX_H_ */
