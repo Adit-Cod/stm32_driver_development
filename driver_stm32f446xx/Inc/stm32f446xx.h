@@ -92,6 +92,10 @@
 /* Common Macros */
 #define __VO                         volatile
 #define __ui32                       uint32_t
+#define ENABLE                       0x1
+#define DISABLE                      0x0
+#define SET                          ENABLE
+#define RESET                        DISABLE
 /*=============================================================================
 =======                       CONSTANTS  &  TYPES                       =======
 =============================================================================*/

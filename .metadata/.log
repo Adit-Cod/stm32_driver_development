@@ -52,3 +52,9 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64
 
 !ENTRY org.eclipse.cdt.core 1 0 2023-05-04 16:31:21.611
 !MESSAGE Indexed 'driver_stm32f446xx' (3 sources, 56 headers) in 0.179 sec: 2,112 declarations; 2,945 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.04%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-05-08 16:28:23.257
+!MESSAGE Indexed 'driver_stm32f446xx' (4 sources, 61 headers) in 0.174 sec: 2,232 declarations; 3,142 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.037%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2023-05-08 16:28:46.427
+!MESSAGE Indexed 'driver_stm32f446xx' (4 sources, 61 headers) in 0.178 sec: 2,232 declarations; 3,142 references; 0 unresolved inclusions; 1 syntax errors; 2 unresolved names (0.037%)

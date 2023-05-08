@@ -1,0 +1,106 @@
+/******************************************************************************
+*****                       STM32 GPIO DRIVER                             *****
+******************************************************************************/
+/*!
+***     \file       Stm32f44xx_gpio.c
+***
+***     \author     Aditya Subramanian
+***                 Email.. aditya.subramanian3005@gmail.com
+***
+***     \brief      This module is intended to act as the main file for the stm32 GPIO Driver
+***     \par        File_description
+***                 Main file of the Stm32 GPIO Driver
+***
+***
+*\n*/
+/*****************************************************************************/
+
+/*=============================================================================
+=======                            INCLUDES                             =======
+=============================================================================*/
+
+/*------ standard includes -------*/
+
+/*------ project includes --------*/
+
+/*------ module includes --------*/
+#include "Stm32f44xx_gpio.h"
+
+/*=============================================================================
+=======               DEFINES & MACROS FOR GENERAL PURPOSE              =======
+=============================================================================*/
+
+/*=============================================================================
+=======                       CONSTANTS  &  TYPES                       =======
+=============================================================================*/
+
+/*=============================================================================
+=======                  PRIVATE FUNCTION DECLARATIONS                  =======
+=============================================================================*/
+
+/*=============================================================================
+=======                              METHODS                            =======
+=============================================================================*/
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_Init()
+ */
+/*!    \brief    Initialize the GPIO Peripheral.
+ *
+ *
+ *     \param   GPIO_Handle_t *pGPIOx,uint8_t PinNumber
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void GPIO_Init(GPIO_Handle_t *pGPIOx)
+{
+
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_DeInit()
+ */
+/*!    \brief    De-Initialize the GPIO Peripheral.
+ *
+ *
+ *     \param   GPIO_Handle_t *pGPIOx
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void GPIO_DeInit(GPIO_RegDef_t *pGPIOx)
+{
+
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_DeInit()
+ */
+/*!    \brief    De-Initialize the GPIO Peripheral.
+ *
+ *
+ *     \param   GPIO_Handle_t *pGPIOx
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+uint8_t GPIO_ReadPin(GPIO_Handle_t *pGPIOx,uint8_t PinNumber);
+uint16_t GPIO_ReadPort(GPIO_Handle_t *pGPIOx);
+void GPIO_ClockControl(GPIO_RegDef_t *pGPIOx,uint8_t Control);
+
+
+void GPIO_WritePin(GPIO_Handle_t *pGPIOx,uint8_t PinNumber, uint8_t Value);
+void GPIO_WritePort(GPIO_Handle_t *pGPIOx,uint16_t Value);
+void GPIO_TogglePin(GPIO_Handle_t *pGPIOx,uint8_t PinNumber);
+void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t Action );
+void GPIO_IRQHandler(uint8_t PinNumber);
