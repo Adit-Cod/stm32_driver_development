@@ -218,7 +218,7 @@ uint8_t GPIO_ReadPin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber)
 {
     uint8_t retVal;
     retVal = (uint8_t)((pGPIOx->IDR >> PinNumber) & 0x1 );
-	return retVal;
+	return 0;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -237,9 +237,7 @@ uint8_t GPIO_ReadPin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber)
  *//*------------------------------------------------------------------------*/
 uint16_t GPIO_ReadPort(GPIO_RegDef_t *pGPIOx)
 {
-	uint16_t retVal;
-	retVal = (uint16_t)(pGPIOx->IDR);
-    return retVal;
+	return 0;
 }
 
 /*---------------------------------------------------------------------------*/
@@ -248,7 +246,7 @@ uint16_t GPIO_ReadPort(GPIO_RegDef_t *pGPIOx)
 /*!    \brief    Write Value to the given Pin
  *
  *
- *     \param   GPIO_RegDef_t *pGPIOx,uint8_t PinNumber, uint8_t Value
+ *     \param   GPIO_Handle_t *pGPIOx,uint8_t PinNumber, uint8_t Value
  *
  *     \returns  void
  *     \pre
@@ -257,12 +255,8 @@ uint16_t GPIO_ReadPort(GPIO_RegDef_t *pGPIOx)
  *     \warning
  *//*------------------------------------------------------------------------*/
 
-void GPIO_WritePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber, uint8_t Value)
+void GPIO_WritePin(GPIO_Handle_t *pGPIOx,uint8_t PinNumber, uint8_t Value)
 {
-	if(Value == GPIO_PIN_SET)
-		pGPIOx->ODR |=  (GPIO_PIN_SET << PinNumber);
-	else
-		pGPIOx->ODR &=  ~(GPIO_PIN_SET << PinNumber);
 
 }
 
@@ -272,7 +266,7 @@ void GPIO_WritePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber, uint8_t Value)
 /*!    \brief    Write Value to the given Port
  *
  *
- *     \param   GPIO_RegDef_t *pGPIOx, uint8_t Value
+ *     \param   GPIO_Handle_t *pGPIOx, uint8_t Value
  *
  *     \returns  void
  *     \pre
@@ -280,9 +274,9 @@ void GPIO_WritePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber, uint8_t Value)
  *
  *     \warning
  *//*------------------------------------------------------------------------*/
-void GPIO_WritePort(GPIO_RegDef_t *pGPIOx,uint16_t Value)
+void GPIO_WritePort(GPIO_Handle_t *pGPIOx,uint16_t Value)
 {
-	pGPIOx->ODR = Value;
+
 }
 
 /*---------------------------------------------------------------------------*/
@@ -291,7 +285,7 @@ void GPIO_WritePort(GPIO_RegDef_t *pGPIOx,uint16_t Value)
 /*!    \brief    Toggle Given GPIO PIN
  *
  *
- *     \param   GPIO_RegDef_t *pGPIOx, uint8_t PinNumber
+ *     \param   GPIO_Handle_t *pGPIOx, uint8_t PinNumber
  *
  *     \returns  void
  *     \pre
@@ -299,9 +293,9 @@ void GPIO_WritePort(GPIO_RegDef_t *pGPIOx,uint16_t Value)
  *
  *     \warning
  *//*------------------------------------------------------------------------*/
-void GPIO_TogglePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber)
+void GPIO_TogglePin(GPIO_Handle_t *pGPIOx,uint8_t PinNumber)
 {
-	pGPIOx->ODR ^= (GPIO_PIN_SET << PinNumber);
+
 }
 
 /*---------------------------------------------------------------------------*/

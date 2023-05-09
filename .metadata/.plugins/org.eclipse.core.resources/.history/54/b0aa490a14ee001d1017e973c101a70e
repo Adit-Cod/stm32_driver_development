@@ -259,10 +259,10 @@ uint16_t GPIO_ReadPort(GPIO_RegDef_t *pGPIOx)
 
 void GPIO_WritePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber, uint8_t Value)
 {
-	if(Value == GPIO_PIN_SET)
-		pGPIOx->ODR |=  (GPIO_PIN_SET << PinNumber);
+	if(Value == GPIO_SET)
+		pGPIOx->ODR |=  (GPIO_SET << PinNumber);
 	else
-		pGPIOx->ODR &=  ~(GPIO_PIN_SET << PinNumber);
+		pGPIOx->ODR &=  ~(GPIO_SET << PinNumber);
 
 }
 
@@ -282,7 +282,7 @@ void GPIO_WritePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber, uint8_t Value)
  *//*------------------------------------------------------------------------*/
 void GPIO_WritePort(GPIO_RegDef_t *pGPIOx,uint16_t Value)
 {
-	pGPIOx->ODR = Value;
+
 }
 
 /*---------------------------------------------------------------------------*/
@@ -291,7 +291,7 @@ void GPIO_WritePort(GPIO_RegDef_t *pGPIOx,uint16_t Value)
 /*!    \brief    Toggle Given GPIO PIN
  *
  *
- *     \param   GPIO_RegDef_t *pGPIOx, uint8_t PinNumber
+ *     \param   GPIO_Handle_t *pGPIOx, uint8_t PinNumber
  *
  *     \returns  void
  *     \pre
@@ -299,9 +299,9 @@ void GPIO_WritePort(GPIO_RegDef_t *pGPIOx,uint16_t Value)
  *
  *     \warning
  *//*------------------------------------------------------------------------*/
-void GPIO_TogglePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber)
+void GPIO_TogglePin(GPIO_Handle_t *pGPIOx,uint8_t PinNumber)
 {
-	pGPIOx->ODR ^= (GPIO_PIN_SET << PinNumber);
+
 }
 
 /*---------------------------------------------------------------------------*/

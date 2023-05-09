@@ -301,7 +301,8 @@ void GPIO_WritePort(GPIO_RegDef_t *pGPIOx,uint16_t Value)
  *//*------------------------------------------------------------------------*/
 void GPIO_TogglePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber)
 {
-	pGPIOx->ODR ^= (GPIO_PIN_SET << PinNumber);
+	pGPIOx->
+
 }
 
 /*---------------------------------------------------------------------------*/

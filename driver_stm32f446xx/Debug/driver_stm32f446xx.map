@@ -43,15 +43,15 @@ Discarded input sections
  .text.GPIO_ClockControl
                 0x0000000000000000      0x1a0 ./Driver/Src/Stm32f44xx_gpio.o
  .text.GPIO_ReadPin
-                0x0000000000000000       0x18 ./Driver/Src/Stm32f44xx_gpio.o
+                0x0000000000000000       0x2a ./Driver/Src/Stm32f44xx_gpio.o
  .text.GPIO_ReadPort
-                0x0000000000000000       0x14 ./Driver/Src/Stm32f44xx_gpio.o
- .text.GPIO_WritePin
                 0x0000000000000000       0x1a ./Driver/Src/Stm32f44xx_gpio.o
+ .text.GPIO_WritePin
+                0x0000000000000000       0x48 ./Driver/Src/Stm32f44xx_gpio.o
  .text.GPIO_WritePort
-                0x0000000000000000       0x16 ./Driver/Src/Stm32f44xx_gpio.o
+                0x0000000000000000       0x1c ./Driver/Src/Stm32f44xx_gpio.o
  .text.GPIO_TogglePin
-                0x0000000000000000       0x16 ./Driver/Src/Stm32f44xx_gpio.o
+                0x0000000000000000       0x28 ./Driver/Src/Stm32f44xx_gpio.o
  .text.GPIO_IRQConfig
                 0x0000000000000000       0x1c ./Driver/Src/Stm32f44xx_gpio.o
  .text.GPIO_IRQHandler
@@ -62,8 +62,8 @@ Discarded input sections
                 0x0000000000000000        0x1 ./Driver/Src/Stm32f44xx_gpio.o
  .bss.gpio_AfTemp_handleh.4284
                 0x0000000000000000        0x1 ./Driver/Src/Stm32f44xx_gpio.o
- .debug_info    0x0000000000000000      0x648 ./Driver/Src/Stm32f44xx_gpio.o
- .debug_abbrev  0x0000000000000000      0x13b ./Driver/Src/Stm32f44xx_gpio.o
+ .debug_info    0x0000000000000000      0x66a ./Driver/Src/Stm32f44xx_gpio.o
+ .debug_abbrev  0x0000000000000000      0x121 ./Driver/Src/Stm32f44xx_gpio.o
  .debug_aranges
                 0x0000000000000000       0x68 ./Driver/Src/Stm32f44xx_gpio.o
  .debug_ranges  0x0000000000000000       0x58 ./Driver/Src/Stm32f44xx_gpio.o
@@ -77,8 +77,8 @@ Discarded input sections
  .debug_macro   0x0000000000000000      0x1df ./Driver/Src/Stm32f44xx_gpio.o
  .debug_macro   0x0000000000000000      0x10c ./Driver/Src/Stm32f44xx_gpio.o
  .debug_macro   0x0000000000000000      0x19a ./Driver/Src/Stm32f44xx_gpio.o
- .debug_line    0x0000000000000000      0x6f3 ./Driver/Src/Stm32f44xx_gpio.o
- .debug_str     0x0000000000000000     0x4e99 ./Driver/Src/Stm32f44xx_gpio.o
+ .debug_line    0x0000000000000000      0x732 ./Driver/Src/Stm32f44xx_gpio.o
+ .debug_str     0x0000000000000000     0x4ea0 ./Driver/Src/Stm32f44xx_gpio.o
  .comment       0x0000000000000000       0x54 ./Driver/Src/Stm32f44xx_gpio.o
  .debug_frame   0x0000000000000000      0x1a4 ./Driver/Src/Stm32f44xx_gpio.o
  .ARM.attributes
