@@ -1,0 +1,308 @@
+/******************************************************************************
+*****                       STM32 GPIO DRIVER                             *****
+******************************************************************************/
+/*!
+***     \file       Stm32f44xx_gpio.c
+***
+***     \author     Aditya Subramanian
+***                 Email.. aditya.subramanian3005@gmail.com
+***
+***     \brief      This module is intended to act as the main file for the stm32 GPIO Driver
+***     \par        File_description
+***                 Main file of the Stm32 GPIO Driver
+***
+***
+*\n*/
+/*****************************************************************************/
+
+/*=============================================================================
+=======                            INCLUDES                             =======
+=============================================================================*/
+
+/*------ standard includes -------*/
+
+/*------ project includes --------*/
+
+/*------ module includes --------*/
+#include "Stm32f44xx_gpio.h"
+
+/*=============================================================================
+=======               DEFINES & MACROS FOR GENERAL PURPOSE              =======
+=============================================================================*/
+
+/*=============================================================================
+=======                       CONSTANTS  &  TYPES                       =======
+=============================================================================*/
+
+/*=============================================================================
+=======                  PRIVATE FUNCTION DECLARATIONS                  =======
+=============================================================================*/
+
+/*=============================================================================
+=======                              METHODS                            =======
+=============================================================================*/
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_Init()
+ */
+/*!    \brief    Initialize the GPIO Peripheral.
+ *
+ *
+ *     \param   GPIO_Handle_t *pGPIOx,uint8_t PinNumber
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void GPIO_Init(GPIO_Handle_t *pGPIOx)
+{
+	/* Configure the Given Pin as per Requested structure */
+	static uint32_t gpio_temphandler;
+	/* Set the MODER Register */
+	if( pGPIOx->GPIO_PinConfig->GPIO_PinMode <= GPIO_MODE_ANALOG)
+	{
+		gpio_temphandler = (pGPIOx->GPIO_PinConfig->GPIO_PinMode << (2*pGPIOx->GPIO_PinConfig->GPIO_PinNumber));
+		pGPIOx->pGPIOx->MODER = gpio_temphandler;
+	}
+	else
+	{
+		/* Interrupt Handling */
+	}
+	gpio_temphandler = RESET;
+
+	/* Set the Output Type Register */
+	gpio_temphandler = (pGPIOx->GPIO_PinConfig->GPIO_PinOPType << (pGPIOx->GPIO_PinConfig->GPIO_PinNumber));
+	pGPIOx->pGPIOx->OTYPER = gpio_temphandler;
+
+
+
+	/* Set the Output Speed */
+	gpio_temphandler = RESET;
+	gpio_temphandler = (pGPIOx->GPIO_PinConfig->GPIO_PinSpeed << (2*pGPIOx->GPIO_PinConfig->GPIO_PinNumber));
+	pGPIOx->pGPIOx->OSPEEDER = gpio_temphandler;
+
+	/* Set the Pull-Up Pull-Down Configuration */
+
+	gpio_temphandler = RESET;
+	gpio_temphandler = (pGPIOx->GPIO_PinConfig->GPIO_PinSpeed << (2*pGPIOx->GPIO_PinConfig->GPIO_PinNumber));
+	pGPIOx->pGPIOx->OSPEEDER = gpio_temphandler;
+
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_DeInit()
+ */
+/*!    \brief    De-Initialize the GPIO Peripheral.
+ *
+ *
+ *     \param   GPIO_Handle_t *pGPIOx
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void GPIO_DeInit(GPIO_RegDef_t *pGPIOx)
+{
+
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_ClockControl()
+ */
+/*!    \brief    Control the Clock Access to the respective GPIO Port through RCC Engine
+ *
+ *
+ *     \param   GPIO_RegDef_t *pGPIOx, uint8_t Control
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void GPIO_ClockControl(GPIO_RegDef_t *pGPIOx,uint8_t Control)
+{
+	if(ENABLE == Control)
+	{
+		/* Enable Requested */
+		if(GPIOA == pGPIOx)
+			GPIOA_CLK_EN();
+		else if(GPIOB == pGPIOx)
+			GPIOB_CLK_EN();
+		else if(GPIOC == pGPIOx)
+			GPIOC_CLK_EN();
+		else if(GPIOD == pGPIOx)
+			GPIOD_CLK_EN();
+		else if(GPIOE == pGPIOx)
+			GPIOE_CLK_EN();
+		else if(GPIOF == pGPIOx)
+			GPIOF_CLK_EN();
+		else if(GPIOG == pGPIOx)
+			GPIOG_CLK_EN();
+		else if(GPIOH == pGPIOx)
+			GPIOH_CLK_EN();
+		else
+		{ /* Error Handling */}
+	}
+	else
+	{
+		/* Disable Requested */
+		if(GPIOA == pGPIOx)
+			GPIOA_CLK_DI();
+		else if(GPIOB == pGPIOx)
+			GPIOB_CLK_DI();
+		else if(GPIOC == pGPIOx)
+			GPIOC_CLK_DI();
+		else if(GPIOD == pGPIOx)
+			GPIOD_CLK_DI();
+		else if(GPIOE == pGPIOx)
+			GPIOE_CLK_DI();
+		else if(GPIOF == pGPIOx)
+			GPIOF_CLK_DI();
+		else if(GPIOG == pGPIOx)
+			GPIOG_CLK_DI();
+		else if(GPIOH == pGPIOx)
+			GPIOH_CLK_DI();
+		else
+		{ /* Error Handling */}
+	}
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_ReadPin()
+ */
+/*!    \brief    Read Value from the given Pin
+ *
+ *
+ *     \param   GPIO_Handle_t *pGPIOx,uint8_t PinNumber
+ *
+ *     \returns  uint8_t Pin Read out Value
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+uint8_t GPIO_ReadPin(GPIO_Handle_t *pGPIOx,uint8_t PinNumber)
+{
+
+	return 0;
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_ReadPort()
+ */
+/*!    \brief    Read Value from the given Port
+ *
+ *
+ *     \param   GPIO_Handle_t *pGPIOx
+ *
+ *     \returns  uint16_t Port Read out Value
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+uint16_t GPIO_ReadPort(GPIO_Handle_t *pGPIOx)
+{
+	return 0;
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_WritePin()
+ */
+/*!    \brief    Write Value to the given Pin
+ *
+ *
+ *     \param   GPIO_Handle_t *pGPIOx,uint8_t PinNumber, uint8_t Value
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+
+void GPIO_WritePin(GPIO_Handle_t *pGPIOx,uint8_t PinNumber, uint8_t Value)
+{
+
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_WritePort()
+ */
+/*!    \brief    Write Value to the given Port
+ *
+ *
+ *     \param   GPIO_Handle_t *pGPIOx, uint8_t Value
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void GPIO_WritePort(GPIO_Handle_t *pGPIOx,uint16_t Value)
+{
+
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_TogglePin()
+ */
+/*!    \brief    Toggle Given GPIO PIN
+ *
+ *
+ *     \param   GPIO_Handle_t *pGPIOx, uint8_t PinNumber
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void GPIO_TogglePin(GPIO_Handle_t *pGPIOx,uint8_t PinNumber)
+{
+
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_IRQConfig()
+ */
+/*!    \brief    Configure IRQ for a given GPIO
+ *
+ *
+ *     \param   uint8_t IRQNumber, uint8_t IRQPriority, uint8_t Action
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t Action )
+{
+
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_IRQHandler()
+ */
+/*!    \brief    Handle IRQ for a given GPIO
+ *
+ *
+ *     \param   uint8_t PinNumber
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void GPIO_IRQHandler(uint8_t PinNumber)
+{
+
+}

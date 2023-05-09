@@ -59,6 +59,48 @@
 void GPIO_Init(GPIO_Handle_t *pGPIOx)
 {
 
+	/* Configure the Given Pin as per Requested structure */
+	static uint32_t gpio_temphandler;
+	/* Set the MODER Register */
+	if( pGPIOx->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG)
+	{
+		gpio_temphandler = (pGPIOx->GPIO_PinConfig.GPIO_PinMode << (2*pGPIOx->GPIO_PinConfig.GPIO_PinNumber));
+		pGPIOx->pGPIOx->MODER &= ~(0x3 << pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
+		pGPIOx->pGPIOx->MODER |= gpio_temphandler;
+	}
+	else
+	{
+		/* Interrupt Handling */
+	}
+
+	/* Set the Output Type Register */
+	gpio_temphandler = RESET;
+	gpio_temphandler = (pGPIOx->GPIO_PinConfig.GPIO_PinOPType << (pGPIOx->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOx->pGPIOx->OTYPER &= ~(0x1 << pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
+	pGPIOx->pGPIOx->OTYPER |= gpio_temphandler;
+
+	/* Set the Output Speed */
+	gpio_temphandler = RESET;
+	gpio_temphandler = (pGPIOx->GPIO_PinConfig.GPIO_PinSpeed << (2*pGPIOx->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOx->pGPIOx->OSPEEDER &= ~(0x3 << pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
+	pGPIOx->pGPIOx->OSPEEDER |= gpio_temphandler;
+
+	/* Set the Pull-Up Pull-Down Configuration */
+
+	gpio_temphandler = RESET;
+	gpio_temphandler = (pGPIOx->GPIO_PinConfig.PIO_PinPUPDControl << (2*pGPIOx->GPIO_PinConfig.GPIO_PinNumber));
+	pGPIOx->pGPIOx->PUPDR &= ~(0x3 << pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
+	pGPIOx->pGPIOx->PUPDR |= gpio_temphandler;
+
+	if(GPIO_MODE_AF == pGPIOx->GPIO_PinConfig.GPIO_PinMode)
+	{
+	   /* Configure Alternate Functionality */
+		static uint8_t gpio_AfTemp_handlel,gpio_AfTemp_handleh;
+		gpio_AfTemp_handlel = pGPIOx->GPIO_PinConfig.GPIO_PinNumber/8;
+		gpio_AfTemp_handleh = pGPIOx->GPIO_PinConfig.GPIO_PinNumber%8;
+
+		pGPIOx->pGPIOx->AFR[gpio_AfTemp_handlel] |= (pGPIOx->GPIO_PinConfig.GPIO_PinAltFunMode << (4*gpio_AfTemp_handleh));
+	}
 }
 
 /*---------------------------------------------------------------------------*/
@@ -77,6 +119,22 @@ void GPIO_Init(GPIO_Handle_t *pGPIOx)
  *//*------------------------------------------------------------------------*/
 void GPIO_DeInit(GPIO_RegDef_t *pGPIOx)
 {
+	if(GPIOA == pGPIOx)
+		GPIOA_RESET();
+	else if(GPIOB == pGPIOx)
+		GPIOB_RESET();
+	else if(GPIOC == pGPIOx)
+		GPIOC_RESET();
+	else if(GPIOD == pGPIOx)
+		GPIOD_RESET();
+	else if(GPIOE == pGPIOx)
+		GPIOE_RESET();
+	else if(GPIOF == pGPIOx)
+		GPIOF_RESET();
+	else if(GPIOG == pGPIOx)
+		GPIOG_RESET();
+	else if(GPIOH == pGPIOx)
+		GPIOH_RESET();
 
 }
 
@@ -96,7 +154,50 @@ void GPIO_DeInit(GPIO_RegDef_t *pGPIOx)
  *//*------------------------------------------------------------------------*/
 void GPIO_ClockControl(GPIO_RegDef_t *pGPIOx,uint8_t Control)
 {
-
+	if(ENABLE == Control)
+	{
+		/* Enable Requested */
+		if(GPIOA == pGPIOx)
+			GPIOA_CLK_EN();
+		else if(GPIOB == pGPIOx)
+			GPIOB_CLK_EN();
+		else if(GPIOC == pGPIOx)
+			GPIOC_CLK_EN();
+		else if(GPIOD == pGPIOx)
+			GPIOD_CLK_EN();
+		else if(GPIOE == pGPIOx)
+			GPIOE_CLK_EN();
+		else if(GPIOF == pGPIOx)
+			GPIOF_CLK_EN();
+		else if(GPIOG == pGPIOx)
+			GPIOG_CLK_EN();
+		else if(GPIOH == pGPIOx)
+			GPIOH_CLK_EN();
+		else
+		{ /* Error Handling */}
+	}
+	else
+	{
+		/* Disable Requested */
+		if(GPIOA == pGPIOx)
+			GPIOA_CLK_DI();
+		else if(GPIOB == pGPIOx)
+			GPIOB_CLK_DI();
+		else if(GPIOC == pGPIOx)
+			GPIOC_CLK_DI();
+		else if(GPIOD == pGPIOx)
+			GPIOD_CLK_DI();
+		else if(GPIOE == pGPIOx)
+			GPIOE_CLK_DI();
+		else if(GPIOF == pGPIOx)
+			GPIOF_CLK_DI();
+		else if(GPIOG == pGPIOx)
+			GPIOG_CLK_DI();
+		else if(GPIOH == pGPIOx)
+			GPIOH_CLK_DI();
+		else
+		{ /* Error Handling */}
+	}
 }
 
 /*---------------------------------------------------------------------------*/

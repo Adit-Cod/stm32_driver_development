@@ -122,11 +122,8 @@ typedef struct
 	__VO __ui32 BSRR;
     /* Configuration Lock Register       */
 	__VO __ui32 LCKR;
-    /* Alternate Function Register Low   */
-	__VO __ui32 AFRL;
-    /* Alternate Function Register High  */
-	__VO __ui32 AFRH;
-
+    /* Alternate Function Register       */
+	__VO __ui32 AFR[2];
 }GPIO_RegDef_t;
 
 /* RCC structure Definition */

@@ -53,7 +53,7 @@
 /* RCC Register Access=                                  */
 #define RCC                         ((RCC_RegDef_t*)RCC_BASEADDR)
 
-/* Clock Access Definition to GPIO ports through RCC Engine*/
+/* Clock Access Definition to GPIO ports through RCC Engine */
 #define GPIOA_CLK_EN()     ((RCC->AHB1ENR |= 1<<0))
 #define GPIOB_CLK_EN()     ((RCC->AHB1ENR |= 1<<1))
 #define GPIOC_CLK_EN()     ((RCC->AHB1ENR |= 1<<2))
@@ -74,8 +74,62 @@
 #define GPIOG_CLK_DI()     ((RCC->AHB1ENR &= ~(1<<6)))
 #define GPIOH_CLK_DI()     ((RCC->AHB1ENR &= ~(1<<7)))
 
+/* Reset the GPIO Registers by using RCC Engine */
+#define GPIOA_RESET()     do{ (RCC->AHB1_RSTR |= (1<<0)); (RCC->AHB1_RSTR &= ~(1<<0)); }while(0)
+#define GPIOB_RESET()     do{ (RCC->AHB1_RSTR |= (1<<1)); (RCC->AHB1_RSTR &= ~(1<<1)); }while(0)
+#define GPIOC_RESET()     do{ (RCC->AHB1_RSTR |= (1<<2)); (RCC->AHB1_RSTR &= ~(1<<2)); }while(0)
+#define GPIOD_RESET()     do{ (RCC->AHB1_RSTR |= (1<<3)); (RCC->AHB1_RSTR &= ~(1<<3)); }while(0)
+#define GPIOE_RESET()     do{ (RCC->AHB1_RSTR |= (1<<4)); (RCC->AHB1_RSTR &= ~(1<<4)); }while(0)
+#define GPIOF_RESET()     do{ (RCC->AHB1_RSTR |= (1<<5)); (RCC->AHB1_RSTR &= ~(1<<5)); }while(0)
+#define GPIOG_RESET()     do{ (RCC->AHB1_RSTR |= (1<<6)); (RCC->AHB1_RSTR &= ~(1<<6)); }while(0)
+#define GPIOH_RESET()     do{ (RCC->AHB1_RSTR |= (1<<7)); (RCC->AHB1_RSTR &= ~(1<<7)); }while(0)
+
+
 #define GPIO_PIN_SET       SET
 #define GPIO_PIN_RESET     RESET
+
+/* Possible GPIO Modes                */
+#define GPIO_MODE_IN        0x0
+#define GPIO_MODE_OUT       0x1
+#define GPIO_MODE_AF        0x2
+#define GPIO_MODE_ANALOG    0x3
+#define GPIO_MODE_IT_RE     0x4
+#define GPIO_MODE_IT_FE     0x5
+#define GPIO_MODE_T_RFT     0x6
+
+/* Possible Pin Out Configurations    */
+#define GPIO_OT_PP          0x0
+#define GPIO_OT_OD          0x1
+
+/* Possible GPIO Speed Configurations */
+#define GPIO_LOW_SPEED     0x0
+#define GPIO_MEDIUM_SPEED  0x1
+#define GPIO_FAST_SPEED    0x2
+#define GPIO_HIGH_SPEED    0x3
+
+/* Possible GPIO PUPD Configurations  */
+#define GPIO_NO_PUPD      0x0
+#define GPIO_PULLUP       0x1
+#define GPIO_PULLDOWN     0x2
+
+/* Possible GPIO PIN Values */
+#define GPIO_PIN_0        0
+#define GPIO_PIN_1        1
+#define GPIO_PIN_2        2
+#define GPIO_PIN_3        3
+#define GPIO_PIN_4        4
+#define GPIO_PIN_5        5
+#define GPIO_PIN_6        6
+#define GPIO_PIN_7        7
+#define GPIO_PIN_8        8
+#define GPIO_PIN_9        9
+#define GPIO_PIN_10       10
+#define GPIO_PIN_11       11
+#define GPIO_PIN_12       12
+#define GPIO_PIN_13       13
+#define GPIO_PIN_14       14
+#define GPIO_PIN_15       15
+
 /*=============================================================================
 =======                       CONSTANTS  &  TYPES                       =======
 =============================================================================*/
