@@ -34,7 +34,6 @@
 
 int main(void)
 {
-	LedToggle_ButtonInit();
 	LedToggle_GpioInit();
     /* Loop forever */
 	for(;;);
