@@ -61,6 +61,8 @@ void GPIO_Init(GPIO_Handle_t *pGPIOx)
 
 	/* Configure the Given Pin as per Requested structure */
 	static uint32_t gpio_temphandler;
+	/* Temp Variable to hold the configuration of register settings */
+	static uint8_t EXTI_Temp1,EXTI_Temp2;
 	/* Set the MODER Register */
 	if( pGPIOx->GPIO_PinConfig.GPIO_PinMode <= GPIO_MODE_ANALOG)
 	{
@@ -70,7 +72,34 @@ void GPIO_Init(GPIO_Handle_t *pGPIOx)
 	}
 	else
 	{
-		/* Interrupt Handling */
+		/* Interrupt Handling for rising Edge, Falling Edge or Both */
+		if(pGPIOx->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_IT_RE)
+		{
+			EXTI->RTSR |= (1<<pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
+			/* Clear the corresponding FTSR Bit */
+            EXTI->FTSR &= ~(1<<pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
+		}
+		else if(pGPIOx->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_IT_FE)
+		{
+			EXTI->FTSR |= (1<<pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
+			/* Clear the corresponding RTSR Bit */
+			EXTI->RTSR &= ~(1<<pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
+		}
+		else if(pGPIOx->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_IT_RFT)
+		{
+			EXTI->FTSR |= (1<<pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
+			/* Set the corresponding RTSR Bit */
+			EXTI->RTSR |= (1<<pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
+		}
+
+		/* Configure the GPIO selection in SysConfig_EXTICR */
+		EXTI_Temp1 = pGPIOx->GPIO_PinConfig.GPIO_PinNumber/FOUR;
+		EXTI_Temp2 = pGPIOx->GPIO_PinConfig.GPIO_PinNumber%FOUR;
+		SYSCFG_CLK_ENABLE();
+		SYSCFG->EXTICR[EXTI_Temp1] |= (GPIO_BASE_TO_EXTIVAL(pGPIOx->pGPIOx) << (EXTI_Temp2*FOUR));
+
+		/* Configure Interrupt Delivery using the IMR        */
+		EXTI->IMR |= (1<<pGPIOx->GPIO_PinConfig.GPIO_PinNumber);
 	}
 
 	/* Set the Output Type Register */
@@ -318,8 +347,71 @@ void GPIO_TogglePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber)
  *
  *     \warning
  *//*------------------------------------------------------------------------*/
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t Action )
+void GPIO_IRQConfig(uint8_t IRQNumber,uint8_t Action )
 {
+    if(Action == ENABLE)
+    {
+    	if(IRQNumber <= 31)
+    	{
+            /* Program ISER0 Register. Refer to ARM Cortex M4 Manual */
+            *(NVIC_ISER0) |= (1 << IRQNumber);
+    	}
+    	else if(IRQNumber >31 && IRQNumber < 64)
+    	{
+    	    /* Program ISER1 Register. Refer to ARM Cortex M4 Manual */
+    		*(NVIC_ISER1) |= (1 << IRQNumber%32);
+    	}
+    	else if(IRQNumber >=64 && IRQNumber < 96)
+    	{
+    		/* Program ISER2 Register. Refer to ARM Cortex M4 Manual */
+    		*(NVIC_ISER3) |= (1 << IRQNumber%64);
+    	}
+    }
+    else
+    {
+    	if(IRQNumber <= 31)
+    	{
+            /* Program ISER0 Register. Refer to ARM Cortex M4 Manual */
+            *(NVIC_ICER0) |= (1 << IRQNumber);
+    	}
+    	else if(IRQNumber >31 && IRQNumber < 64)
+    	{
+    	    /* Program ISER1 Register. Refer to ARM Cortex M4 Manual */
+    		*(NVIC_ICER1) |= (1 << IRQNumber%32);
+    	}
+    	else if(IRQNumber >=64 && IRQNumber < 96)
+    	{
+    		/* Program ISER2 Register. Refer to ARM Cortex M4 Manual */
+    		*(NVIC_ICER3) |= (1 << IRQNumber%64);
+    	}
+    }
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: GPIO_IRQPriorityConfig()
+ */
+/*!    \brief    Set the Priority
+ *
+ *
+ *     \param   uint8_t IRQNumber,uin8_t Priority
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint8_t Priority)
+{
+	static uint8_t iprx,iprx_section,shift_amount;
+	/* Calculate which row the insertion needs to take place*/
+	iprx = IRQNumber/4;
+	/* Calculate the exact section into which data needs to be written. For a figurative description; refer to the NVIC PR table in ARM M4 Manual */
+	iprx_section =  IRQNumber%4;
+	/* Calculate the exact shift amount by addding 4 (the lower 4 bits are not used as per the manual and hence only higher nibble is written to) */
+	shift_amount = (8*iprx_section) + (8 - NO_PR_BITS_IMPLEMENTED);
+	/* Write to the register's appropriate position based on above calculation */
+	*(NVIC_PR_BASE_ADDR + iprx*4) |= (Priority<< shift_amount);
 
 }
 
@@ -339,5 +431,9 @@ void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t Action )
  *//*------------------------------------------------------------------------*/
 void GPIO_IRQHandler(uint8_t PinNumber)
 {
-
+	/*Called by Respective IRQ Handler */
+	if(EXTI->PR &(1<< PinNumber))
+	{
+		EXTI->PR |= (1<<PinNumber);
+	}
 }

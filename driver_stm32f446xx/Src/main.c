@@ -39,3 +39,8 @@ int main(void)
     /* Loop forever */
 	for(;;);
 }
+
+void EXTI0_IRQHandler(void)
+{
+	GPIO_IRQHandler(0);
+}

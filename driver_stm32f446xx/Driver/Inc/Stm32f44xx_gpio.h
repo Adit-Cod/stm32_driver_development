@@ -50,10 +50,7 @@
 #define GPIOG    ((GPIO_RegDef_t*)GPIOG_BASEADDR)
 /* Access to GPIO H structure with corresponding address */
 #define GPIOH    ((GPIO_RegDef_t*)GPIOH_BASEADDR)
-/* RCC Register Access=                                  */
-#define RCC                         ((RCC_RegDef_t*)RCC_BASEADDR)
 
-/* Clock Access Definition to GPIO ports through RCC Engine */
 #define GPIOA_CLK_EN()     ((RCC->AHB1ENR |= 1<<0))
 #define GPIOB_CLK_EN()     ((RCC->AHB1ENR |= 1<<1))
 #define GPIOC_CLK_EN()     ((RCC->AHB1ENR |= 1<<2))
@@ -87,7 +84,7 @@
 
 #define GPIO_PIN_SET       SET
 #define GPIO_PIN_RESET     RESET
-
+#define FOUR               0x4
 /* Possible GPIO Modes                */
 #define GPIO_MODE_IN        0x0
 #define GPIO_MODE_OUT       0x1
@@ -95,7 +92,7 @@
 #define GPIO_MODE_ANALOG    0x3
 #define GPIO_MODE_IT_RE     0x4
 #define GPIO_MODE_IT_FE     0x5
-#define GPIO_MODE_T_RFT     0x6
+#define GPIO_MODE_IT_RFT    0x6
 
 /* Possible Pin Out Configurations    */
 #define GPIO_OT_PP          0x0
@@ -174,7 +171,8 @@ void GPIO_DeInit(GPIO_RegDef_t *pGPIOx);
 void GPIO_WritePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber, uint8_t Value);
 void GPIO_WritePort(GPIO_RegDef_t *pGPIOx,uint16_t Value);
 void GPIO_TogglePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber);
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t Action );
+void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t Action );
 void GPIO_IRQHandler(uint8_t PinNumber);
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint8_t Priority);
 
 #endif /* INC_STM32F44XX_GPIO_H_ */

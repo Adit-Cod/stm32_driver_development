@@ -30,6 +30,46 @@
 /*=============================================================================
 =======               DEFINES & MACROS FOR GENERAL PURPOSE              =======
 =============================================================================*/
+/* Common Macros */
+#define __VO                         volatile
+#define __ui32                       uint32_t
+#define ENABLE                       0x1
+#define DISABLE                      0x0
+#define SET                          ENABLE
+#define RESET                        DISABLE
+
+/* Processor Specific Macros */
+#define NVIC_ISER0                  ((__VO __ui32*)0xE000E100)
+#define NVIC_ISER1                  ((__VO __ui32*)0xE000E104)
+#define NVIC_ISER2                  ((__VO __ui32*)0xE000E108)
+#define NVIC_ISER3                  ((__VO __ui32*)0xE000E10C)
+
+#define NVIC_ICER0                  ((__VO __ui32*)0xE000E180)
+#define NVIC_ICER1                  ((__VO __ui32*)0xE000E184)
+#define NVIC_ICER2                  ((__VO __ui32*)0xE000E188)
+#define NVIC_ICER3                  ((__VO __ui32*)0xE000E18C)
+
+#define NVIC_PR_BASE_ADDR           ((__VO __ui32*)0xE000E400)
+#define NO_PR_BITS_IMPLEMENTED      0x4
+
+/* NVIC Priorities */
+#define NVIC_IRQ_PRIO0            0
+#define NVIC_IRQ_PRIO1            1
+#define NVIC_IRQ_PRIO2            2
+#define NVIC_IRQ_PRIO3            3
+#define NVIC_IRQ_PRIO4            4
+#define NVIC_IRQ_PRIO5            5
+#define NVIC_IRQ_PRIO6            6
+#define NVIC_IRQ_PRIO7            7
+#define NVIC_IRQ_PRIO8            8
+#define NVIC_IRQ_PRIO9            9
+#define NVIC_IRQ_PRIO10           10
+#define NVIC_IRQ_PRIO11           11
+#define NVIC_IRQ_PRIO12           12
+#define NVIC_IRQ_PRIO13           13
+#define NVIC_IRQ_PRIO14           14
+#define NVIC_IRQ_PRIO15           15
+
 /* Flash Base Address */
 #define FLASH_BASEADDR            0x08000000U
 #define SRAM1_BASEADDR            0x20000000U
@@ -81,21 +121,41 @@
 
 /* EXTI Base Address */
 #define EXTI_BASEADDR              (APB2_BASEADDR + 0x3C00U)
-#define EXTI                        EXTI_BASEADDR
+
 /* SYSCFG Base Address */
 #define SYSCFG_BASEADDR             (APB2_BASEADDR + 0x3800U)
 
 /* RCC Engine Base Address */
 #define RCC_BASEADDR                (AHB1_BASEADDR + 0x3800U)
 
+/* RCC Register Access                                   */
+#define RCC                         ((RCC_RegDef_t*)RCC_BASEADDR)
+/* EXTI Register Access                                  */
+#define EXTI                        ((EXTI_RegDef_t*)EXTI_BASEADDR)
+/* SYSCFG Register Access                                */
+#define SYSCFG                       ((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
+/* Clock Access Definition to GPIO ports through RCC Engine */
 
-/* Common Macros */
-#define __VO                         volatile
-#define __ui32                       uint32_t
-#define ENABLE                       0x1
-#define DISABLE                      0x0
-#define SET                          ENABLE
-#define RESET                        DISABLE
+#define SYSCFG_CLK_ENABLE()         ((RCC->APB2ENR |= 1<<14))
+
+/* Function to assign appropriate value based on Gpio Base Address. used for EXTI Register Assignment */
+#define GPIO_BASE_TO_EXTIVAL(pGpiox)   ( (pGpiox == GPIOA)? 0:\
+		                                 (pGpiox == GPIOB)? 1:\
+		                                 (pGpiox == GPIOC)? 2:\
+		                                 (pGpiox == GPIOD)? 3:\
+		                                 (pGpiox == GPIOE)? 4:\
+		                                 (pGpiox == GPIOF)? 5:\
+		                                 (pGpiox == GPIOG)? 6:\
+		                                 (pGpiox == GPIOH)? 7:0 )
+/* IRQ Numbers EXTI LINE */
+#define EXTI0_IRQ_NO                 6
+#define EXTI1_IRQ_NO                 7
+#define EXTI2_IRQ_NO                 8
+#define EXTI3_IRQ_NO                 9
+#define EXTI4_IRQ_NO                 10
+#define EXTI9_5_IRQ_NO               23
+#define EXTI15_10_IRQ_NO             40
+
 /*=============================================================================
 =======                       CONSTANTS  &  TYPES                       =======
 =============================================================================*/
@@ -209,5 +269,43 @@ typedef struct
 
 }RCC_RegDef_t;
 
+/* Peripheral Register Definition Structure  for EXTI */
+typedef struct
+{
+	/* Interrupt Mask Register           */
+     __VO __ui32 IMR;
+    /* Event Mask Register               */
+    __VO __ui32  EMR;
+    /* Rising trigger selection register */
+    __VO __ui32  RTSR;
+    /* Falling trigger selection register*/
+    __VO __ui32  FTSR;
+    /* Software interrupt event register */
+    __VO __ui32  SWIER;
+    /* Pending Register */
+    __VO __ui32  PR;
+
+}EXTI_RegDef_t;
+
+/* Peripheral Register Definition Structure for SysCfg */
+
+typedef struct
+{
+	/* SYSCFG memory re-map register                       */
+	__VO __ui32 MEMRMP;
+	/* SYSCFG peripheral mode configuration register      */
+	__VO __ui32 PMC;
+	/* SYSCFG external interrupt configuration register   */
+	__VO __ui32 EXTICR[4];
+	/* Reserved                                           */
+	__VO __ui32 Reserved1[2];
+	/* Compensation cell control register                 */
+	__VO __ui32 CMPCR;
+	/* Reserved                                           */
+	__VO __ui32 Reserved2[2];
+	/* SYSCFG configuration register                      */
+	__VO __ui32 CFGR;
+
+}SYSCFG_RegDef_t;
 
 #endif /* STM32F446XX_H_ */

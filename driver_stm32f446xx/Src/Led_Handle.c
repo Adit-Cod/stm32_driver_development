@@ -39,11 +39,7 @@
 /*=============================================================================
 =======                  PRIVATE FUNCTION DECLARATIONS                  =======
 =============================================================================*/
-void delay(uint32_t Value)
-{
-	Value*=20;
-	for(uint32_t i = 0 ; i<= Value; i++);
-}
+void delay(uint32_t Value);
 /*=============================================================================
 =======                              METHODS                            =======
 =============================================================================*/
@@ -92,4 +88,10 @@ void LedToggle_ButtonInit(void)
 
     GPIO_ClockControl(GPIOC,ENABLE);
     GPIO_Init(&GpioButton);
+}
+
+void delay(uint32_t Value)
+{
+	Value*=20;
+	for(uint32_t i = 0 ; i<= Value; i++);
 }
