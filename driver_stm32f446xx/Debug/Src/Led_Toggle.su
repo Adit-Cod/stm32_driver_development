@@ -1,0 +1,2 @@
+Led_Toggle.c:42:6:delay	24	static
+Led_Toggle.c:51:6:LedToggle_GpioInit	24	static

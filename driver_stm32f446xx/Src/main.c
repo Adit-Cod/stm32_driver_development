@@ -26,6 +26,7 @@
 #include "Stm32f44xx_USART.h"
 #include "Stm32f44xx_I2C.h"
 #include "Stm32f44xx_SPI.h"
+#include "Led_Toggle.h"
 
 #if !defined(__SOFT_FP__) && defined(__ARM_FP)
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
@@ -33,6 +34,7 @@
 
 int main(void)
 {
+	LedToggle_GpioInit();
     /* Loop forever */
 	for(;;);
 }
