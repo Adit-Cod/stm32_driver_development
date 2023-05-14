@@ -37,7 +37,7 @@
 /*=============================================================================
 =======                  PRIVATE FUNCTION DECLARATIONS                  =======
 =============================================================================*/
-
+static void gpio_delay(uint32_t Value);
 /*=============================================================================
 =======                              METHODS                            =======
 =============================================================================*/
@@ -292,7 +292,6 @@ void GPIO_WritePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber, uint8_t Value)
 		pGPIOx->ODR |=  (GPIO_PIN_SET << PinNumber);
 	else
 		pGPIOx->ODR &=  ~(GPIO_PIN_SET << PinNumber);
-
 }
 
 /*---------------------------------------------------------------------------*/
@@ -347,7 +346,7 @@ void GPIO_TogglePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber)
  *
  *     \warning
  *//*------------------------------------------------------------------------*/
-void GPIO_IRQConfig(uint8_t IRQNumber,uint8_t Action )
+void GPIO_IRQConfig(uint8_t IRQNumber,uint32_t Action )
 {
     if(Action == ENABLE)
     {
@@ -411,7 +410,7 @@ void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint8_t Priority)
 	/* Calculate the exact shift amount by addding 4 (the lower 4 bits are not used as per the manual and hence only higher nibble is written to) */
 	shift_amount = (8*iprx_section) + (8 - NO_PR_BITS_IMPLEMENTED);
 	/* Write to the register's appropriate position based on above calculation */
-	*(NVIC_PR_BASE_ADDR + iprx*4) |= (Priority<< shift_amount);
+	*(NVIC_PR_BASE_ADDR + iprx) |= (Priority<< shift_amount);
 
 }
 
@@ -431,9 +430,23 @@ void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint8_t Priority)
  *//*------------------------------------------------------------------------*/
 void GPIO_IRQHandler(uint8_t PinNumber)
 {
-	/*Called by Respective IRQ Handler */
-	if(EXTI->PR &(1<< PinNumber))
+	static uint8_t count = ZERO;
+	/* Called by Respective IRQ Handler. Set the PR Buffer to 1 as indication of servicing/serviced Interrupt */
+	if(EXTI->PR & (1<< PinNumber))
 	{
 		EXTI->PR |= (1<<PinNumber);
 	}
+	while(count<=GPIO_MAX_IT_COUNT)
+	{
+		GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+		gpio_delay(5000);
+		count++;
+	}
+	count = ZERO;
+}
+
+static void gpio_delay(uint32_t Value)
+{
+	Value*=20;
+	for(uint32_t i = 0 ; i<= Value; i++);
 }

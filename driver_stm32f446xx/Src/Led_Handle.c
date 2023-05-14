@@ -61,14 +61,11 @@ void LedToggle_GpioInit(void)
 
     GPIO_ClockControl(GPIOA,ENABLE);
     GPIO_Init(&GpioLed);
-
     while(1)
     {
-    	if(GPIO_ReadPin(GPIOC, GPIO_PIN_13) == USER_BUTTON_PRESSED)
-    	{
-    		delay(5000);
-    		GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-    	}
+    	/* Set the LED Bit in a while 1 = ON all the time. This Action is inteneded to change upon activation of a
+    	 * GPIO Interrupt */
+    	GPIO_WritePin(GPIOA, GPIO_PIN_5, LED_BIT_SET);
     }
 }
 

@@ -127,6 +127,8 @@
 #define GPIO_PIN_14       14
 #define GPIO_PIN_15       15
 
+#define ZERO                    0
+#define GPIO_MAX_IT_COUNT      20
 /*=============================================================================
 =======                       CONSTANTS  &  TYPES                       =======
 =============================================================================*/
@@ -171,7 +173,7 @@ void GPIO_DeInit(GPIO_RegDef_t *pGPIOx);
 void GPIO_WritePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber, uint8_t Value);
 void GPIO_WritePort(GPIO_RegDef_t *pGPIOx,uint16_t Value);
 void GPIO_TogglePin(GPIO_RegDef_t *pGPIOx,uint8_t PinNumber);
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t Action );
+void GPIO_IRQConfig(uint8_t IRQNumber, uint32_t Action );
 void GPIO_IRQHandler(uint8_t PinNumber);
 void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint8_t Priority);
 

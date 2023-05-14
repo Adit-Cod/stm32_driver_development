@@ -1,0 +1,100 @@
+/******************************************************************************
+*****                       LED INTERRUPT HANDLE MAIN                     *****
+******************************************************************************/
+/*!
+***     \file       Led_InterruptHandle.c
+***
+***     \author     Aditya Subramanian
+***                 Email.. aditya.subramanian3005@gmail.com
+***
+***     \brief      This module is intended to act as the main file for the stm32
+***     			on board Interrupt Application
+***     \par        File_description
+***                 Main file of the Stm32 Driver
+***
+***
+*\n*/
+/*****************************************************************************/
+
+/*=============================================================================
+=======                            INCLUDES                             =======
+=============================================================================*/
+
+/*------ standard includes -------*/
+#include <string.h>
+/*------ project includes --------*/
+#include "Stm32f44xx_gpio.h"
+#include "stm32f446xx.h"
+/*------ module includes --------*/
+#include "Led_InterruptHandle.h"
+
+/*=============================================================================
+=======               DEFINES & MACROS FOR GENERAL PURPOSE              =======
+=============================================================================*/
+
+/*=============================================================================
+=======                       CONSTANTS  &  TYPES                       =======
+=============================================================================*/
+
+/*=============================================================================
+=======                  PRIVATE FUNCTION DECLARATIONS                  =======
+=============================================================================*/
+static void delay(uint32_t Value);
+/*=============================================================================
+=======                              METHODS                            =======
+=============================================================================*/
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: LedInterrupt_ButtonInit()
+ */
+/*!    \brief   Configure On Board Button as an Interrupt.
+ *
+ *
+ *     \param   void
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+void LedInterrupt_ButtonInit(void)
+{
+	/* Button is at PC13 In Nucleo Board!: As per schematics. */
+    GPIO_Handle_t GpioButton;
+    /* Clean Up Structure before population. Sanitary check */
+    memset(&GpioButton,0,sizeof(GpioButton));
+
+    /* Configure the LED by populating the structure */
+    GpioButton.pGPIOx = GPIOC;
+    GpioButton.GPIO_PinConfig.GPIO_PinMode       = GPIO_MODE_IT_FE;
+    GpioButton.GPIO_PinConfig.GPIO_PinNumber     = GPIO_PIN_13;
+    GpioButton.GPIO_PinConfig.GPIO_PinSpeed      = GPIO_MEDIUM_SPEED;
+    GpioButton.GPIO_PinConfig.PIO_PinPUPDControl = GPIO_NO_PUPD;
+    GpioButton.GPIO_PinConfig.GPIO_PinOPType     = GPIO_OT_PP;
+
+    GPIO_IRQPriorityConfig(EXTI9_5_IRQ_NO,NVIC_IRQ_PRIO15);
+    GPIO_IRQConfig(EXTI9_5_IRQ_NO,ENABLE);
+    GPIO_ClockControl(GPIOC,ENABLE);
+    GPIO_Init(&GpioButton);
+}
+
+/*---------------------------------------------------------------------------*/
+/*     FUNCTION: delay(uint32_t value)
+ */
+/*!    \brief    Simulate Delay
+ *
+ *
+ *     \param   uint32_t Value
+ *
+ *     \returns  void
+ *     \pre
+ *     \post
+ *
+ *     \warning
+ *//*------------------------------------------------------------------------*/
+static void delay(uint32_t Value)
+{
+	Value*=20;
+	for(uint32_t i = 0 ; i<= Value; i++);
+}
