@@ -35,15 +35,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  15 .debug_ranges 000000d8  00000000  00000000  00013b68  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00002933  00000000  00000000  00013c40  2**0
+ 16 .debug_macro  000016b4  00000000  00000000  00013c40  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00001c26  00000000  00000000  00016573  2**0
+ 17 .debug_line   00001c26  00000000  00000000  000152f4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00009b49  00000000  00000000  00018199  2**0
+ 18 .debug_str    00009bd9  00000000  00000000  00016f1a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  00021ce2  2**0
+ 19 .comment      00000053  00000000  00000000  00020af3  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000035c  00000000  00000000  00021d38  2**2
+ 20 .debug_frame  0000035c  00000000  00000000  00020b48  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -1302,18 +1302,25 @@ void LedInterrupt_ButtonInit(void)
  8000a06:	2300      	movs	r3, #0
  8000a08:	733b      	strb	r3, [r7, #12]
 
+    /* ***NOTE: This application uses on-board button which is at PC 13 and therefore;
+     * The EXTI line 10-15 is configured
+     * This will change with change in button input. */
+
     GPIO_IRQPriorityConfig(EXTI15_10_IRQ_NO,NVIC_IRQ_PRIO15);
  8000a0a:	210f      	movs	r1, #15
  8000a0c:	2028      	movs	r0, #40	; 0x28
  8000a0e:	f7ff ff33 	bl	8000878 <GPIO_IRQPriorityConfig>
+    /* Configure the EXTI and IRQ */
     GPIO_IRQConfig(EXTI15_10_IRQ_NO,ENABLE);
  8000a12:	2101      	movs	r1, #1
  8000a14:	2028      	movs	r0, #40	; 0x28
  8000a16:	f7ff fead 	bl	8000774 <GPIO_IRQConfig>
+    /* Enable Clock Access to GPIO port c */
     GPIO_ClockControl(GPIOC,ENABLE);
  8000a1a:	2101      	movs	r1, #1
  8000a1c:	4805      	ldr	r0, [pc, #20]	; (8000a34 <LedInterrupt_ButtonInit+0x54>)
  8000a1e:	f7ff fda1 	bl	8000564 <GPIO_ClockControl>
+    /* Populate the GPIO Buffers with the appropriate configuration done above. */
     GPIO_Init(&GpioButton);
  8000a22:	1d3b      	adds	r3, r7, #4
  8000a24:	4618      	mov	r0, r3

@@ -73,8 +73,7 @@ void LedInterrupt_ButtonInit(void)
     GpioButton.GPIO_PinConfig.PIO_PinPUPDControl = GPIO_NO_PUPD;
     GpioButton.GPIO_PinConfig.GPIO_PinOPType     = GPIO_OT_PP;
 
-    /* ***NOTE: This application uses on-board button which is at PC 13 and therefore;
-     * The EXTI line 10-15 is configured
+    /* This application uses on-board button which is at PC 13 and therefore; the EXTI line 10-15 is configured
      * This will change with change in button input. */
 
     GPIO_IRQPriorityConfig(EXTI15_10_IRQ_NO,NVIC_IRQ_PRIO15);

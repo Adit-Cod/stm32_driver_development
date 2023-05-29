@@ -73,16 +73,13 @@ void LedInterrupt_ButtonInit(void)
     GpioButton.GPIO_PinConfig.PIO_PinPUPDControl = GPIO_NO_PUPD;
     GpioButton.GPIO_PinConfig.GPIO_PinOPType     = GPIO_OT_PP;
 
-    /* ***NOTE: This application uses on-board button which is at PC 13 and therefore;
-     * The EXTI line 10-15 is configured
+    /* This application uses on-board button which is at PC 13 and therefore; the EXTI line 10-15 is configured
      * This will change with change in button input. */
-
     GPIO_IRQPriorityConfig(EXTI15_10_IRQ_NO,NVIC_IRQ_PRIO15);
     /* Configure the EXTI and IRQ */
     GPIO_IRQConfig(EXTI15_10_IRQ_NO,ENABLE);
     /* Enable Clock Access to GPIO port c */
     GPIO_ClockControl(GPIOC,ENABLE);
-    /* Populate the GPIO Buffers with the appropriate configuration done above. */
     GPIO_Init(&GpioButton);
 }
 

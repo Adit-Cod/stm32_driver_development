@@ -291,7 +291,7 @@ typedef struct
 
 typedef struct
 {
-	/* SYSCFG memory re-map register                      */
+	/* SYSCFG memory re-map register                       */
 	__VO __ui32 MEMRMP;
 	/* SYSCFG peripheral mode configuration register      */
 	__VO __ui32 PMC;
@@ -307,28 +307,5 @@ typedef struct
 	__VO __ui32 CFGR;
 
 }SYSCFG_RegDef_t;
-
-/* SPI Peripheral Register Definition */
-typedef struct
-{
-	/* Control Register 1                                  */
-    __VO __ui32 SPI_CR1;
-    /* Control Register 2                                  */
-    __VO __ui32 SPI_CR2;
-    /* Status Register                                     */
-    __VO __ui32 SPI_SR;
-    /* Data Register                                       */
-    __VO __ui32 SPI_DR;
-    /* SPI CRC Polynomial Register                         */
-    __VO __ui32 SPI_CRCPR;
-    /* SPI CRC Rx Register                                 */
-    __VO __ui32 SPI_RXCRCR;
-    /* SPI CRC Tx Register                                 */
-    __VO __ui32 SPI_TXCRCR;
-    /* SPI I2S Configuration Register                      */
-    __VO __ui32 SPI_I2SCFGR;
-    /* Pre-Scalar Register                                 */
-    __VO __ui32 SPI_I2SPR;
-}SPI_RegDef_t;
 
 #endif /* STM32F446XX_H_ */

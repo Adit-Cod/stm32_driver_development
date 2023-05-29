@@ -1,0 +1,28 @@
+/******************************************************************************
+*****                       STM32 SPI DRIVER                             *****
+******************************************************************************/
+/*!
+***     \file       Stm32f44xx_SPI.c
+***
+***     \author     Aditya Subramanian
+***                 Email.. aditya.subramanian3005@gmail.com
+***
+***     \brief      This module is intended to act as the main file for the stm32 SPI Driver
+***     \par        File_description
+***                 Main file of the Stm32 SPI Driver
+***
+***
+*\n*/
+/*****************************************************************************/
+
+/*=============================================================================
+=======                            INCLUDES                             =======
+=============================================================================*/
+
+/*------ standard includes -------*/
+
+/*------ project includes --------*/
+
+/*------ module includes --------*/
+#include "Stm32f44xx_SPI.h"
+#include "Stm32f44xx_gpio.h"
