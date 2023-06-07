@@ -47,10 +47,7 @@
 #define SPI4_CLK_DI()    (RCC->APB2ENR &= ~(1<<13))
 
 /* SPI Peripheral Register Reset */
-#define SPI1_RESET()    do{ RCC-> }while(0)
-#define SPI2_RESET()    do{ }while(0)
-#define SPI3_RESET()    do{ }while(0)
-#define SPI4_RESET()    do{ }while(0)
+#define SPI1_RESET()    do{ }while(0);
 
 /* SPI Base Address Mapping           */
 #define SPI1             ((SPI_RegDef_t*)SPI1_BASEADDR)

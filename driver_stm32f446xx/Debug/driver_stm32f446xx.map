@@ -37,10 +37,17 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./Driver/Src/Stm32f44xx_SPI.o
  .data          0x0000000000000000        0x0 ./Driver/Src/Stm32f44xx_SPI.o
  .bss           0x0000000000000000        0x0 ./Driver/Src/Stm32f44xx_SPI.o
- .debug_info    0x0000000000000000       0x68 ./Driver/Src/Stm32f44xx_SPI.o
- .debug_abbrev  0x0000000000000000       0x29 ./Driver/Src/Stm32f44xx_SPI.o
+ .text.SPI_ClockControl
+                0x0000000000000000       0xe0 ./Driver/Src/Stm32f44xx_SPI.o
+ .text.SPI_Init
+                0x0000000000000000       0xc4 ./Driver/Src/Stm32f44xx_SPI.o
+ .bss.tempReg.4351
+                0x0000000000000000        0x4 ./Driver/Src/Stm32f44xx_SPI.o
+ .debug_info    0x0000000000000000      0x45c ./Driver/Src/Stm32f44xx_SPI.o
+ .debug_abbrev  0x0000000000000000      0x104 ./Driver/Src/Stm32f44xx_SPI.o
  .debug_aranges
-                0x0000000000000000       0x18 ./Driver/Src/Stm32f44xx_SPI.o
+                0x0000000000000000       0x28 ./Driver/Src/Stm32f44xx_SPI.o
+ .debug_ranges  0x0000000000000000       0x18 ./Driver/Src/Stm32f44xx_SPI.o
  .debug_macro   0x0000000000000000       0x84 ./Driver/Src/Stm32f44xx_SPI.o
  .debug_macro   0x0000000000000000      0xaa8 ./Driver/Src/Stm32f44xx_SPI.o
  .debug_macro   0x0000000000000000       0x22 ./Driver/Src/Stm32f44xx_SPI.o
@@ -50,13 +57,14 @@ Discarded input sections
  .debug_macro   0x0000000000000000       0x6a ./Driver/Src/Stm32f44xx_SPI.o
  .debug_macro   0x0000000000000000      0x1df ./Driver/Src/Stm32f44xx_SPI.o
  .debug_macro   0x0000000000000000      0x1f7 ./Driver/Src/Stm32f44xx_SPI.o
- .debug_macro   0x0000000000000000       0x4c ./Driver/Src/Stm32f44xx_SPI.o
+ .debug_macro   0x0000000000000000       0xca ./Driver/Src/Stm32f44xx_SPI.o
  .debug_macro   0x0000000000000000      0x1ab ./Driver/Src/Stm32f44xx_SPI.o
- .debug_line    0x0000000000000000      0x426 ./Driver/Src/Stm32f44xx_SPI.o
- .debug_str     0x0000000000000000     0x5190 ./Driver/Src/Stm32f44xx_SPI.o
+ .debug_line    0x0000000000000000      0x4fc ./Driver/Src/Stm32f44xx_SPI.o
+ .debug_str     0x0000000000000000     0x55ba ./Driver/Src/Stm32f44xx_SPI.o
  .comment       0x0000000000000000       0x54 ./Driver/Src/Stm32f44xx_SPI.o
+ .debug_frame   0x0000000000000000       0x60 ./Driver/Src/Stm32f44xx_SPI.o
  .ARM.attributes
-                0x0000000000000000       0x33 ./Driver/Src/Stm32f44xx_SPI.o
+                0x0000000000000000       0x2e ./Driver/Src/Stm32f44xx_SPI.o
  .group         0x0000000000000000        0xc ./Driver/Src/Stm32f44xx_gpio.o
  .group         0x0000000000000000        0xc ./Driver/Src/Stm32f44xx_gpio.o
  .group         0x0000000000000000        0xc ./Driver/Src/Stm32f44xx_gpio.o
@@ -873,7 +881,7 @@ LOAD c:/st/stm32cubeide_1.8.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_ranges  0x00000000000000a0       0x18 ./Src/main.o
  .debug_ranges  0x00000000000000b8       0x20 ./Startup/startup_stm32f446retx.o
 
-.debug_macro    0x0000000000000000     0x16b4
+.debug_macro    0x0000000000000000     0x1732
  .debug_macro   0x0000000000000000       0x7b ./Driver/Src/Stm32f44xx_gpio.o
  .debug_macro   0x000000000000007b      0x1a5 ./Driver/Src/Stm32f44xx_gpio.o
  .debug_macro   0x0000000000000220      0x151 ./Src/Led_Handle.o
@@ -917,7 +925,7 @@ LOAD c:/st/stm32cubeide_1.8.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_macro   0x000000000000149d      0x145 ./Src/main.o
  .debug_macro   0x00000000000015e2       0x52 ./Src/main.o
  .debug_macro   0x0000000000001634       0x2e ./Src/main.o
- .debug_macro   0x0000000000001662       0x52 ./Src/main.o
+ .debug_macro   0x0000000000001662       0xd0 ./Src/main.o
 
 .debug_line     0x0000000000000000     0x1c26
  .debug_line    0x0000000000000000      0x937 ./Driver/Src/Stm32f44xx_gpio.o
@@ -926,16 +934,16 @@ LOAD c:/st/stm32cubeide_1.8.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_line    0x000000000000151c      0x686 ./Src/main.o
  .debug_line    0x0000000000001ba2       0x84 ./Startup/startup_stm32f446retx.o
 
-.debug_str      0x0000000000000000     0x9bd9
+.debug_str      0x0000000000000000     0x9d7d
  .debug_str     0x0000000000000000     0x520e ./Driver/Src/Stm32f44xx_gpio.o
                                        0x53a5 (size before relaxing)
  .debug_str     0x000000000000520e     0x34ee ./Src/Led_Handle.o
                                        0x865f (size before relaxing)
  .debug_str     0x00000000000086fc       0x4d ./Src/Led_InterruptHandle.o
                                        0x8631 (size before relaxing)
- .debug_str     0x0000000000008749     0x145f ./Src/main.o
-                                       0x9914 (size before relaxing)
- .debug_str     0x0000000000009ba8       0x31 ./Startup/startup_stm32f446retx.o
+ .debug_str     0x0000000000008749     0x1603 ./Src/main.o
+                                       0x9ab8 (size before relaxing)
+ .debug_str     0x0000000000009d4c       0x31 ./Startup/startup_stm32f446retx.o
                                          0x93 (size before relaxing)
 
 .comment        0x0000000000000000       0x53

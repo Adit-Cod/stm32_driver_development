@@ -1,0 +1,56 @@
+/******************************************************************************
+*****                       STM32 SPI DRIVER                             *****
+******************************************************************************/
+/*!
+***     \file       Stm32f44xx_SPI.c
+***
+***     \author     Aditya Subramanian
+***                 Email.. aditya.subramanian3005@gmail.com
+***
+***     \brief      This module is intended to act as the main file for the stm32 SPI Driver
+***     \par        File_description
+***                 Main file of the Stm32 SPI Driver
+***
+***
+*\n*/
+/*****************************************************************************/
+
+/*=============================================================================
+=======                            INCLUDES                             =======
+=============================================================================*/
+
+/*------ standard includes -------*/
+
+/*------ project includes --------*/
+
+/*------ module includes --------*/
+#include "Stm32f44xx_SPI.h"
+#include "Stm32f44xx_gpio.h"
+
+/*=============================================================================
+=======               DEFINES & MACROS FOR GENERAL PURPOSE              =======
+=============================================================================*/
+
+/*=============================================================================
+=======                       CONSTANTS  &  TYPES                       =======
+=============================================================================*/
+
+/*=============================================================================
+=======                  PRIVATE FUNCTION DECLARATIONS                  =======
+=============================================================================*/
+static void gpio_delay(uint32_t Value);
+/*=============================================================================
+=======                              METHODS                            =======
+=============================================================================*/
+
+void SPI_ClockControl(SPI_RegDef_t *pSPIx,uint8_t Control);
+void SPI_Init(SPI_Handle_t *pSPIx);
+void SPI_DeInit(SPI_RegDef_t *pSPIx);
+
+void SPI_Send(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uin32_t Len);
+void SPI_ReceiveData(uint8_t *pRxBuffer, uin32_t Len);
+
+/* IRQ and ISR Handling */
+void SPI_IRQConfig(uint8_t IRQNumber, uint32_t Action );
+void SPI_IRQHandler(SPI_Handle_t* pHandle);
+void SPI_IRQPriorityConfig(uint8_t IRQNumber,uint8_t Priority);

@@ -1,0 +1,2 @@
+Stm32f44xx_SPI.c:61:6:SPI_ClockControl	16	static
+Stm32f44xx_SPI.c:108:6:SPI_Init	16	static

@@ -38,7 +38,7 @@
 /*=============================================================================
 =======                  PRIVATE FUNCTION DECLARATIONS                  =======
 =============================================================================*/
-
+//static void gpio_delay(uint32_t Value);
 /*=============================================================================
 =======                              METHODS                            =======
 =============================================================================*/
@@ -107,79 +107,9 @@ void SPI_ClockControl(SPI_RegDef_t *pSPIx,uint8_t Control)
  *//*------------------------------------------------------------------------*/
 void SPI_Init(SPI_Handle_t *pSPIx)
 {
-	static uint32_t tempReg;
-
-	/* Set the Device Mode */
-	tempReg |= pSPIx->SPIConfig.SPI_DeviceMode << SPI_CR1_MSTR;
-
-	/* Configure Bus Config */
-
-	if(pSPIx->SPIConfig.SPI_BusConfig == SPI_BUS_CONFIG_FD)
-	{
-        /*  BiDi Bit Cleared  */
-		tempReg &= ~(1<<SPI_CR1_BIDI_MODE);
-
-	}
-	else if(pSPIx->SPIConfig.SPI_BusConfig == SPI_BUS_CONFIG_HD)
-	{
-         /* BiDi Bit Set */
-		tempReg |= (1<<SPI_CR1_BIDI_MODE);
-	}
-	else if(pSPIx->SPIConfig.SPI_BusConfig == SPI_BUS_CONFIG_S_RX)
-	{
-		/* Clear BiDi Bit */
-		tempReg &= ~(1<<SPI_CR1_BIDI_MODE);
-		/* Set Rx Only Bit . To force clock for data reception */
-		tempReg |= (1<<SPI_CR1_RX_ONLY);
-	}
-	else
-	{/* Error Handling */}
-
-	/* Configure Clock SPI_SclkSpeed */
-	tempReg |= pSPIx->SPIConfig.SPI_SclkSpeed << SPI_CR1_BR;
-
-	/* DFF Configuration  */
-	tempReg |= pSPIx->SPIConfig.SPI_DFF << SPI_CR1_DFF;
-
-	/* CPOL Configuration */
-	tempReg |= pSPIx->SPIConfig.SPI_CPOL << SPI_CR1_CPOL;
-
-	/* CPOH Configuration */
-	tempReg |= pSPIx->SPIConfig.SPI_CPHA << SPI_CR1_CPHA;
-
-	pSPIx->pSPIx->SPI_CR1 = tempReg;
 
 }
-
-/*---------------------------------------------------------------------------*/
-/*     FUNCTION: SPI_DeInit()
- */
-/*!    \brief    Reset the SPI Registers
- *
- *
- *     \param    SPI_Handle_t *pSPIx
- *
- *     \returns  void
- *     \pre
- *     \post
- *
- *     \warning
- *//*------------------------------------------------------------------------*/
-void SPI_DeInit(SPI_RegDef_t *pSPIx)
-{
-
-	if(SPI1 == pSPIx)
-		SPI1_CLK_EN();
-	else if(SPI2 == pSPIx)
-		SPI2_CLK_EN();
-	else if(SPI3 == pSPIx)
-		SPI3_CLK_EN();
-	else if(SPI4 == pSPIx)
-		SPI4_CLK_EN();
-	else
-	{ /* Error Handling */}
-
-}
+void SPI_DeInit(SPI_RegDef_t *pSPIx);
 
 void SPI_Send(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uint32_t Len);
 void SPI_ReceiveData(uint8_t *pRxBuffer, uint32_t Len);

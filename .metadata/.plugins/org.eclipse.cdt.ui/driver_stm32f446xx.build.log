@@ -1,30 +1,10 @@
-10:55:22 **** Build of configuration Debug for project driver_stm32f446xx ****
+17:42:58 **** Incremental Build of configuration Debug for project driver_stm32f446xx ****
 make -j12 all 
-arm-none-eabi-gcc -mcpu=cortex-m4 -g3 -DDEBUG -c -x assembler-with-cpp -MMD -MP -MF"Startup/startup_stm32f446retx.d" -MT"Startup/startup_stm32f446retx.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Startup/startup_stm32f446retx.o" "../Startup/startup_stm32f446retx.s"
-arm-none-eabi-gcc "../Src/Led_Handle.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Src" -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/Led_Handle.d" -MT"Src/Led_Handle.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/Led_Handle.o"
-arm-none-eabi-gcc "../Src/Led_InterruptHandle.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Src" -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/Led_InterruptHandle.d" -MT"Src/Led_InterruptHandle.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/Led_InterruptHandle.o"
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Src" -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
-arm-none-eabi-gcc "../Src/syscalls.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Src" -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/syscalls.d" -MT"Src/syscalls.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/syscalls.o"
-arm-none-eabi-gcc "../Src/sysmem.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Src" -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Inc" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/sysmem.d" -MT"Src/sysmem.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/sysmem.o"
-arm-none-eabi-gcc "../Driver/Src/Stm32f44xx_SPI.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Inc" -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Driver/Src/Stm32f44xx_SPI.d" -MT"Driver/Src/Stm32f44xx_SPI.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Driver/Src/Stm32f44xx_SPI.o"
-arm-none-eabi-gcc "../Driver/Src/Stm32f44xx_gpio.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F4 -DSTM32F446RETx -DNUCLEO_F446RE -c -I../Inc -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver/Inc" -I"C:/Ad_Docs/Embedded Systems/git/driver_stm32f44/stm32_driver_development/driver_stm32f446xx/Driver" -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Driver/Src/Stm32f44xx_gpio.d" -MT"Driver/Src/Stm32f44xx_gpio.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Driver/Src/Stm32f44xx_gpio.o"
-../Src/Led_InterruptHandle.c:103:13: warning: 'delay' defined but not used [-Wunused-function]
-  103 | static void delay(uint32_t Value)
-      |             ^~~~~
-arm-none-eabi-gcc -o "driver_stm32f446xx.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Ad_Docs\Embedded Systems\git\driver_stm32f44\stm32_driver_development\driver_stm32f446xx\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="driver_stm32f446xx.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: driver_stm32f446xx.elf
- 
 arm-none-eabi-size   driver_stm32f446xx.elf 
-arm-none-eabi-objdump -h -S  driver_stm32f446xx.elf  > "driver_stm32f446xx.list"
-arm-none-eabi-objcopy  -O binary  driver_stm32f446xx.elf  "driver_stm32f446xx.bin"
    text	   data	    bss	    dec	    hex	filename
    2840	      8	   1576	   4424	   1148	driver_stm32f446xx.elf
 Finished building: default.size.stdout
  
-Finished building: driver_stm32f446xx.list
-Finished building: driver_stm32f446xx.bin
- 
- 
 
-10:55:31 Build Finished. 0 errors, 1 warnings. (took 8s.416ms)
+17:43:02 Build Finished. 0 errors, 0 warnings. (took 3s.611ms)
 

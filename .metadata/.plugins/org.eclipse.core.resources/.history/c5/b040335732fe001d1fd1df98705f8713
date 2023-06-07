@@ -46,97 +46,11 @@
 #define SPI3_CLK_DI()    (RCC->APB1ENR &= ~(1<<15))
 #define SPI4_CLK_DI()    (RCC->APB2ENR &= ~(1<<13))
 
-/* SPI Peripheral Register Reset */
-#define SPI1_RESET()    do{ RCC-> }while(0)
-#define SPI2_RESET()    do{ }while(0)
-#define SPI3_RESET()    do{ }while(0)
-#define SPI4_RESET()    do{ }while(0)
-
 /* SPI Base Address Mapping           */
 #define SPI1             ((SPI_RegDef_t*)SPI1_BASEADDR)
 #define SPI2             ((SPI_RegDef_t*)SPI2_BASEADDR)
 #define SPI3             ((SPI_RegDef_t*)SPI3_BASEADDR)
 #define SPI4             ((SPI_RegDef_t*)SPI4_BASEADDR)
-
-/* SPI Device Modes                   */
-#define SPI_DEVICE_MODE_MASTER    1
-#define SPI_DEVICE_MODE_SLAVE     0
-
-
-/* SPI Bus Config                     */
-#define SPI_BUS_CONFIG_FD         1
-#define SPI_BUS_CONFIG_HD         2
-#define SPI_BUS_CONFIG_S_RX       3
-
-/* SPI Clock Speeds                   */
-#define SPI_SCLK_SPEED_DIV2      0
-#define SPI_SCLK_SPEED_DIV4      1
-#define SPI_SCLK_SPEED_DIV6      2
-#define SPI_SCLK_SPEED_DIV8      3
-#define SPI_SCLK_SPEED_DIV16     4
-#define SPI_SCLK_SPEED_DIV32     5
-#define SPI_SCLK_SPEED_DIV64     6
-#define SPI_SCLK_SPEED_DIV128    8
-
-/*SPI DFF Config                      */
-#define SPI_DFF_8BIT             0
-#define SPI_DFF_16BIT            1
-
-/* SPI CPOL Config                    */
-
-#define SPI_CPOL_LOW             0
-#define SPI_CPOL_HIGH            1
-
-/* SPI CPHA Config                    */
-
-#define SPI_CPHA_LOW              0
-#define SPI_CPHA_HIGH             1
-
-/* SPI SSM Config                     */
-#define SPI_SSM_ENABLE            1
-#define SPI_SSM_DISABLE           0
-
-/* SPI CR1 Register Peripheral Bit Position Definition */
-
-#define SPI_CR1_CPHA       0
-#define SPI_CR1_CPOL       1
-#define SPI_CR1_MSTR       2
-#define SPI_CR1_BR         3
-#define SPI_CR1_SPE        6
-#define SPI_CR1_LSBFIRST   7
-#define SPI_CR1_SSI        8
-#define SPI_CR1_SSM		   9
-#define SPI_CR1_RX_ONLY    10
-#define SPI_CR1_DFF        11
-#define SPI_CR1_CRC_NEXT   12
-#define SPI_CR1_CRC_EN     13
-#define SPI_CR1_BIDI_OE    14
-#define SPI_CR1_BIDI_MODE  15
-
-/* SPI CR2 Register Peripheral Bit Position Definition */
-
-#define SPI_CR2_RXDMAEN    0
-#define SPI_CR2_TXDMAEN    1
-#define SPI_CR2_SSOE       2
-#define SPI_CR2_FRF        4
-#define SPI_CR2_ERRIE      5
-#define SPI_CR2_RXNEIE     6
-#define SPI_CR2_TXEIE      7
-
-/* SPI Status Register Peripheral Bit Position Definition */
-
-#define SPI_SR_RXNE        0
-#define SPI_SR_TXE         1
-#define SPI_SR_CHSIDE      2
-#define SPI_SR_UDR         3
-#define SPI_SR_CRC_ERR     4
-#define SPI_SR_MODF        5
-#define SPI_SR_OVR         6
-#define SPI_SR_BSY         7
-#define SPI_SR_FRE         8
-
-
-
 /*=============================================================================
 =======                       CONSTANTS  &  TYPES                       =======
 =============================================================================*/
@@ -170,21 +84,5 @@ typedef struct
 	/* Configuration Handle of SPI Peripheral    */
 	SPI_Config_t  SPIConfig;
 }SPI_Handle_t;
-
-/*=============================================================================
-=======                       PUBLIC FUNCTION DECLARATIONS              =======
-=============================================================================*/
-
-void SPI_ClockControl(SPI_RegDef_t *pSPIx,uint8_t Control);
-void SPI_Init(SPI_Handle_t *pSPIx);
-void SPI_DeInit(SPI_RegDef_t *pSPIx);
-
-void SPI_Send(SPI_RegDef_t *pSPIx, uint8_t *pTxBuffer, uint32_t Len);
-void SPI_ReceiveData(uint8_t *pRxBuffer, uint32_t Len);
-
-/* IRQ and ISR Handling */
-void SPI_IRQConfig(uint8_t IRQNumber, uint32_t Action );
-void SPI_IRQHandler(SPI_Handle_t* pHandle);
-void SPI_IRQPriorityConfig(uint8_t IRQNumber,uint8_t Priority);
 
 #endif /* INC_STM32F44XX_SPI_H_ */
